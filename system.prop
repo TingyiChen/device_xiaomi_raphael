@@ -443,3 +443,6 @@ ro.hardware.fp.fod=true
 persist.vendor.sys.fp.fod.location.X_Y=445,1931
 persist.vendor.sys.fp.fod.size.width_height=190,190
 persist.radio.multisim.config=dsds
+
+ro.surface_flinger.vsync_event_phase_offset_ns=2000000
+ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
