@@ -121,15 +121,11 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
 
-    #Create QMUX deamon socket area
+    # This location is used by QCRIL to host UNIX domain
+    # socket files used for internal IPC within QCRIL
+    # modules
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
-    mkdir /dev/socket/qmux_audio 0770 media audio
-    chmod 2770 /dev/socket/qmux_audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    chmod 2770 /dev/socket/qmux_bluetooth
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-    chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
     mkdir /mnt/vendor/persist/bluetooth 0770 bluetooth bluetooth
@@ -139,9 +135,6 @@ on boot
     mkdir /mnt/vendor/persist/secnvm 0770 system system
     mkdir /mnt/vendor/persist/iar_db 0770 system system
     mkdir /mnt/vendor/spunvm 0770 system system
-
-    #Create NETMGR daemon socket area
-    mkdir /dev/socket/netmgr 0750 radio radio
 
     setprop wifi.interface wlan0
 
@@ -291,10 +284,6 @@ on post-fs-data
     #create port-bridge log dir
     mkdir /data/vendor/port_bridge 0770 radio radio
     chmod 0770 /data/vendor/port_bridge
-
-    #create netmgr log dir
-    mkdir /data/vendor/netmgr 0770 radio radio
-    chmod 0770 /data/vendor/netmgr
 
     # Create the directories used by CnE subsystem
     mkdir /data/vendor/connectivity 0771 radio radio
@@ -668,10 +657,6 @@ service vendor.qmuxd /system/vendor/bin/qmuxd
     group radio audio bluetooth gps nfc diag
     disabled
 
-service vendor.netmgrd /system/vendor/bin/netmgrd
-    class main
-    disabled
-
 service vendor.sensors /vendor/bin/sscrpcd sensorspd
     class early_hal
     user system
@@ -683,10 +668,6 @@ service vendor.sensors.qti /vendor/bin/sensors.qti
     user system
     group system
     disabled
-
-on property:ro.vendor.use_data_netmgrd=false
-    # netmgr not supported on specific target
-    stop vendor.netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
