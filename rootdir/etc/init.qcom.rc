@@ -294,10 +294,6 @@ on post-fs-data
     mkdir /data/vendor/netmgr 0770 radio radio
     chmod 0770 /data/vendor/netmgr
 
-    #create ipacm log dir
-    mkdir /data/vendor/ipa 0770 radio radio
-    chmod 0770 /data/vendor/ipa
-
     #Create QTI dir for logs
     mkdir /data/vendor/dataqti 0770 radio radio
     chmod 0770 /data/vendor/dataqti
@@ -684,12 +680,15 @@ service vendor.ipacm-diag /system/vendor/bin/ipacm-diag
     group radio diag oem_2901
     disabled
 
+<<<<<<< HEAD
 service vendor.ipacm /system/vendor/bin/ipacm
     class main
     user radio
     group radio inet
     disabled
 
+=======
+>>>>>>> 43f786d... sdm845-common: init.qcom.rc: FR 53051: remove configs for vendor data ipa modules
 service vendor.dataqti /system/vendor/bin/qti
     class main
     user radio
