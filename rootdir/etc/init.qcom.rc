@@ -357,6 +357,10 @@ on post-fs-data
     mkdir /data/fota 0771
     chown system system /data/fota
 
+    # Create directories for wifihal services
+    mkdir /dev/socket/wifihal 0770 wifi wifi
+    chmod 2770 /dev/socket/wifihal
+
     # Create /data/time folder for time-services
     mkdir /data/vendor/time/ 0700 system system
 
