@@ -233,7 +233,6 @@ on charger
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
     mkdir /mnt/vendor/persist/subsys 0770 root system
-    start vendor.hvdcp_opti
     start vendor.power_off_alarm
     setprop vendor.usb.controller a600000.dwc3
     setprop sys.usb.configfs 1
@@ -329,11 +328,6 @@ service vendor.energy-awareness /vendor/bin/energy-awareness
     user system
     group system
     oneshot
-
-service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
-    class main
-    user root
-    group system wakelock
 
 #service vendor.tlocd /vendor/bin/tloc_daemon
 #    class late_start
