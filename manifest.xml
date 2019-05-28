@@ -191,6 +191,7 @@
         <interface>
             <name>IDevice</name>
             <instance>default</instance>
+            <instance>qti-default</instance>
             <instance>qti-dsp</instance>
             <instance>qti-gpu</instance>
             <instance>qti-hta</instance>
