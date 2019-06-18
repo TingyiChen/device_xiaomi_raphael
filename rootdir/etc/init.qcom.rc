@@ -227,6 +227,10 @@ on boot
     #Create camera directory
     mkdir /mnt/vendor/persist/camera 0755 system cameraserver
 
+    # Sensors log dir
+    mkdir /data/vendor/sensors
+    chown system system /data/vendor/sensors
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/vendor/misc 01771 system system
