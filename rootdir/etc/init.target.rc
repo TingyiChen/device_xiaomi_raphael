@@ -43,7 +43,6 @@ on init
     wait /dev/block/platform/soc/1d84000.ufshc
     symlink /dev/block/platform/soc/1d84000.ufshc /dev/block/bootdevice
     start logd
-    start vendor.qseecomd
     start keymaster-4-0
     start keymaster-sb-4-0
 
@@ -242,11 +241,6 @@ on charger
     mkdir /mnt/vendor/persist
     wait /dev/block/platform/soc/1d84000.ufshc/by-name/persist
     mount ext4 /dev/block/bootdevice/by-name/persist /mnt/vendor/persist nosuid nodev barrier=1
-
-service vendor.qseecomd /vendor/bin/qseecomd
-    class core
-    user root
-    group root
 
 service vendor.thermal-engine /vendor/bin/thermal-engine
    class main
