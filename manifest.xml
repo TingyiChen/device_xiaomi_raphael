@@ -202,7 +202,6 @@
             <instance>qti-default</instance>
             <instance>qti-dsp</instance>
             <instance>qti-gpu</instance>
-            <instance>qti-hta</instance>
         </interface>
     </hal>
     <hal format="hidl">
