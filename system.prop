@@ -485,3 +485,4 @@ vendor.audio.feature.usb_offload_sidetone_volume.enable=false
 vendor.audio.feature.vbat.enable=true
 vendor.audio.feature.wsa.enable=false
 audio.offload.min.duration.secs=30
+vendor.audio.feature.multi_voice_session.enable=true
