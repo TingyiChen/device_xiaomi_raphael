@@ -347,12 +347,6 @@ service leds-sh /system/vendor/bin/sh /vendor/etc/init.leds.sh
     user root
     oneshot
 
-service nv_mac /vendor/bin/nv_mac
-    class late_start
-    user system
-    group system inet net_admin wifi net_raw
-    oneshot
-
 on property:vendor.audio.cit.spkcal.copy=true
     copy /data/vendor/cit/tas2557_cal.bin /mnt/vendor/persist/audio/tas2557_cal.bin
     copy /data/vendor/cit/tas2557_cal.txt /mnt/vendor/persist/audio/tas2557_cal.txt

@@ -15,6 +15,7 @@
 # Executables
 /vendor/bin/mlipayd@1\.1                      u:object_r:hal_mlipay_default_exec:s0
 /vendor/bin/nv_mac                            u:object_r:wcnss_service_exec:s0
+/vendor/bin/wifi-mac-generator                u:object_r:wcnss_service_exec:s0
 
 # Fingerprint devices
 /dev/goodix_fp                                u:object_r:fingerprint_device:s0
