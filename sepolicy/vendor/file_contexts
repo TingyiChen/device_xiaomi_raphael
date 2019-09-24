@@ -26,6 +26,7 @@
 # HALs
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service                                  u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.light@2\.0-service\.xiaomi_raphael                                    u:object_r:hal_light_default_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.1-service-qti                                       u:object_r:hal_neuralnetworks_default_exec:s0
 /vendor/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.xiaomi_raphael           u:object_r:hal_lineage_fod_default_exec:s0
 /vendor/bin/hw/vendor\.lineage\.camera\.motor@1.0-service\.xiaomi_raphael                               u:object_r:hal_lineage_camera_motor_default_exec:s0
 /vendor/bin/hw/vendor\.xiaomi\.hardware\.displayfeature@1\.0-service                                    u:object_r:hal_displayfeature_default_exec:s0
