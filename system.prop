@@ -108,7 +108,6 @@ persist.radio.VT_CAM_INTERFACE=1
 persist.rcs.supported=0
 # Set network mode to (T/L/G/W/1X/EVDO, T/L/G/W/1X/EVDO) for 7+7 mode device on DSDS mode
 
-dalvik.vm.heapsize=36m
 dev.pm.dyn_samplingrate=1
 
 #ro.hdmi.enable=true
@@ -319,7 +318,6 @@ ro.config.ringtone=Ring_Synth_04.ogg
 ro.config.notification_sound=pixiedust.ogg
 ro.carrier=unknown
 ro.config.alarm_alert=Alarm_Classic.ogg
-ro.dalvik.vm.native.bridge=0
 ro.vendor.extension_library=libqti-perfd-client.so
 persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.sib16_support=1
@@ -331,11 +329,6 @@ ro.frp.pst=/dev/block/bootdevice/by-name/frp
 persist.sys.offlinelog.kernel
 persist.sys.offlinelog.logcat
 persist.sys.qseelogd=true
-dalvik.vm.heapstartsize=8m
-dalvik.vm.heapsize=512m
-dalvik.vm.heaptargetutilization=0.75
-dalvik.vm.heapminfree=512k
-dalvik.vm.heapmaxfree=8m
 persist.demo.hdmirotationlock=false
 persist.sys.sf.color_saturation=1.0
 debug.sf.hw=0
