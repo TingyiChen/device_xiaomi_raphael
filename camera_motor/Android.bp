@@ -30,4 +30,5 @@ cc_binary {
         "libutils",
         "vendor.lineage.camera.motor@1.0",
     ],
+    vendor: true,
 }

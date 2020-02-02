@@ -1,0 +1,10 @@
+# Camera Motor
+/dev/drv8846_dev         u:object_r:camera_motor_device:s0
+
+# Data files
+/data/display(/.*)?                 u:object_r:display_data_file:s0
+
+# HALs
+/vendor/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.xiaomi_raphael    u:object_r:hal_lineage_fod_default_exec:s0
+/vendor/bin/hw/vendor\.lineage\.camera\.motor@1.0-service\.xiaomi_raphael                u:object_r:hal_lineage_camera_motor_default_exec:s0
+
