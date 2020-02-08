@@ -47,23 +47,12 @@ vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
 
 # Audio
-vendor/lib64/hw/audio.primary.msmnile.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
-vendor/lib64/libaudioalsa.so
-vendor/lib64/libaudio_log_utils.so
-vendor/lib64/libaudioroute_ext.so
 vendor/lib64/libqtigef.so
-vendor/lib64/libtinycompress_vendor.so
-vendor/lib/hw/audio.primary.msmnile.so
 vendor/lib/libadiertac.so
-vendor/lib/libadm.so
 vendor/lib/libaudcal.so
-vendor/lib/libaudioalsa.so
-vendor/lib/libaudio_log_utils.so
-vendor/lib/libaudioroute_ext.so
 vendor/lib/libqtigef.so
-vendor/lib/libtinycompress_vendor.so
 
 # Audio amplifier
 vendor/firmware/tfa98xx.cnt
