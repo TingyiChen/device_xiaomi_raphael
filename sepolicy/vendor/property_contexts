@@ -1,9 +1,8 @@
 # Camera
-camera.                     u:object_r:camera_prop:s0
-persist.camera.             u:object_r:camera_prop:s0
-persist.vendor.camera.      u:object_r:camera_prop:s0
-vendor.camera.              u:object_r:camera_prop:s0
-vidhance.                   u:object_r:camera_prop:s0
+camera.                     u:object_r:vendor_camera_prop:s0
+persist.camera.             u:object_r:vendor_camera_prop:s0
+vendor.camera.              u:object_r:vendor_camera_prop:s0
+vidhance.                   u:object_r:vendor_camera_prop:s0
 
 # Display feature
 init.svc.displayfeature-hal-1-0          u:object_r:vendor_displayfeature_prop:s0
