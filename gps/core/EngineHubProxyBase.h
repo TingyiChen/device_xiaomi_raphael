@@ -101,14 +101,15 @@ public:
         (void) additionalSystemInfo;
         return false;
     }
+
+    inline virtual bool configLeverArm(const LeverArmConfigInfo& configInfo) {
+        (void) configInfo;
+        return false;
+    }
 };
 
-typedef std::function<void(const UlpLocation& ulpLocation,
-                           const GpsLocationExtended& locationExtended,
-                           enum loc_sess_status status,
-                           LocPosTechMask techMask,
-                           bool fromEngineHub)>
-        GnssAdapterReportPositionEventCb;
+typedef std::function<void(int count, EngineLocationInfo* locationArr)>
+        GnssAdapterReportEnginePositionsEventCb;
 
 typedef std::function<void(const GnssSvNotification& svNotify,
                            bool fromEngineHub)>
@@ -117,13 +118,18 @@ typedef std::function<void(const GnssSvNotification& svNotify,
 typedef std::function<void(const GnssAidingDataSvMask& svDataMask)>
         GnssAdapterReqAidingDataCb;
 
+typedef std::function<void(bool nHzNeeded, bool nHzMeasNeeded)>
+        GnssAdapterUpdateNHzRequirementCb;
+
 // potential parameters: message queue: MsgTask * msgTask;
 // callback function to report back dr and ppe position and sv report
-typedef EngineHubProxyBase* (getEngHubProxyFn)(const MsgTask * msgTask,
-                                               IOsObserver* osObserver,
-                                               GnssAdapterReportPositionEventCb positionEventCb,
-                                               GnssAdapterReportSvEventCb svEventCb,
-                                               GnssAdapterReqAidingDataCb reqAidingDataCb);
+typedef EngineHubProxyBase* (getEngHubProxyFn)(
+        const MsgTask * msgTask,
+        IOsObserver* osObserver,
+        GnssAdapterReportEnginePositionsEventCb positionEventCb,
+        GnssAdapterReportSvEventCb svEventCb,
+        GnssAdapterReqAidingDataCb reqAidingDataCb,
+        GnssAdapterUpdateNHzRequirementCb updateNHzRequirementCb);
 
 } // namespace loc_core
 

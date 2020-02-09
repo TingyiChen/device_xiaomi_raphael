@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -488,6 +488,7 @@ private:
             for (size_t i = 0; i < count; i++) {
                 ids[i] = mAPI.mGeofenceBiDict.getId(sessions[i]);
             }
+            LOC_LOGD("%s:]Returned geofence-id: %d in add geofence", __FUNCTION__, *ids);
             mAPI.onAddGeofencesCb(count, errors, ids);
             free(ids);
         }
@@ -505,6 +506,7 @@ private:
                 for (size_t i = 0; i < count; i++) {
                     ids[i] = mRemovedGeofenceBiDict->getId(sessions[i]);
                 }
+                LOC_LOGD("%s:]Returned geofence-id: %d in remove geofence", __FUNCTION__, *ids);
                 mAPI.onRemoveGeofencesCb(count, errors, ids);
                 free(ids);
                 delete(mRemovedGeofenceBiDict);

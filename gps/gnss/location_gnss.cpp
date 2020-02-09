@@ -1,4 +1,4 @@
-/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -66,14 +66,27 @@ static void agpsDataConnOpen(AGpsExtType agpsType, const char* apnName, int apnL
 static void agpsDataConnClosed(AGpsExtType agpsType);
 static void agpsDataConnFailed(AGpsExtType agpsType);
 static void getDebugReport(GnssDebugReport& report);
-static void updateConnectionStatus(bool connected, int8_t type);
+static void updateConnectionStatus(bool connected, int8_t type, bool roaming = false,
+                                   NetworkHandle networkHandle = NETWORK_HANDLE_UNKNOWN);
 static void getGnssEnergyConsumed(GnssEnergyConsumedCallback energyConsumedCb);
+static void enableNfwLocationAccess(bool enable);
+static void nfwInit(const NfwCbInfo& cbInfo);
+static void getPowerStateChanges(void* powerStateCb);
 
 static void odcpiInit(const OdcpiRequestCallback& callback);
 static void odcpiInject(const Location& location);
 
 static void blockCPI(double latitude, double longitude, float accuracy,
                      int blockDurationMsec, double latLonDiffThreshold);
+static void updateBatteryStatus(bool charging);
+static void updateSystemPowerState(PowerStateType systemPowerState);
+static uint32_t setConstrainedTunc (bool enable, float tuncConstraint,
+                                    uint32_t energyBudget);
+static uint32_t setPositionAssistedClockEstimator(bool enable);
+static uint32_t gnssUpdateSvConfig(const GnssSvTypeConfig& svTypeConfig,
+                                   const GnssSvIdConfig& svIdConfig);
+static uint32_t gnssResetSvConfig();
+static uint32_t configLeverArm(const LeverArmConfigInfo& configInfo);
 
 static const GnssInterface gGnssInterface = {
     sizeof(GnssInterface),
@@ -108,7 +121,17 @@ static const GnssInterface gGnssInterface = {
     odcpiInject,
     blockCPI,
     getGnssEnergyConsumed,
-    injectLocationExt
+    enableNfwLocationAccess,
+    nfwInit,
+    getPowerStateChanges,
+    injectLocationExt,
+    updateBatteryStatus,
+    updateSystemPowerState,
+    setConstrainedTunc,
+    setPositionAssistedClockEstimator,
+    gnssUpdateSvConfig,
+    gnssResetSvConfig,
+    configLeverArm,
 };
 
 #ifndef DEBUG_X86
@@ -315,9 +338,11 @@ static void getDebugReport(GnssDebugReport& report) {
     }
 }
 
-static void updateConnectionStatus(bool connected, int8_t type) {
+static void updateConnectionStatus(bool connected, int8_t type,
+                                   bool roaming, NetworkHandle networkHandle) {
     if (NULL != gGnssAdapter) {
-        gGnssAdapter->getSystemStatus()->eventConnectionStatus(connected, type);
+        gGnssAdapter->getSystemStatus()->eventConnectionStatus(
+                connected, type, roaming, networkHandle);
     }
 }
 
@@ -349,9 +374,82 @@ static void getGnssEnergyConsumed(GnssEnergyConsumedCallback energyConsumedCb) {
     }
 }
 
+static void enableNfwLocationAccess(bool enable) {
+    if (NULL != gGnssAdapter) {
+        gGnssAdapter->nfwControlCommand(enable);
+    }
+}
+
+static void nfwInit(const NfwCbInfo& cbInfo) {
+    if (NULL != gGnssAdapter) {
+        gGnssAdapter->initNfwCommand(cbInfo);
+    }
+}
+static void getPowerStateChanges(void* powerStateCb)
+{
+    if (NULL != gGnssAdapter) {
+        gGnssAdapter->getPowerStateChangesCommand(powerStateCb);
+    }
+}
+
 static void injectLocationExt(const GnssLocationInfoNotification &locationInfo)
 {
    if (NULL != gGnssAdapter) {
        gGnssAdapter->injectLocationExtCommand(locationInfo);
    }
+}
+
+static void updateBatteryStatus(bool charging) {
+    if (NULL != gGnssAdapter) {
+        gGnssAdapter->getSystemStatus()->updatePowerConnectState(charging);
+    }
+}
+
+static void updateSystemPowerState(PowerStateType systemPowerState) {
+   if (NULL != gGnssAdapter) {
+       gGnssAdapter->updateSystemPowerStateCommand(systemPowerState);
+   }
+}
+
+static uint32_t setConstrainedTunc (bool enable, float tuncConstraint, uint32_t energyBudget) {
+    if (NULL != gGnssAdapter) {
+        return gGnssAdapter->setConstrainedTuncCommand(enable, tuncConstraint, energyBudget);
+    } else {
+        return 0;
+    }
+}
+
+static uint32_t setPositionAssistedClockEstimator(bool enable) {
+    if (NULL != gGnssAdapter) {
+        return gGnssAdapter->setPositionAssistedClockEstimatorCommand(enable);
+    } else {
+        return 0;
+    }
+}
+
+static uint32_t gnssUpdateSvConfig(
+        const GnssSvTypeConfig& svTypeConfig,
+        const GnssSvIdConfig& svIdConfig) {
+    if (NULL != gGnssAdapter) {
+        return gGnssAdapter->gnssUpdateSvConfigCommand(
+                svTypeConfig, svIdConfig);
+    } else {
+        return 0;
+    }
+}
+
+static uint32_t gnssResetSvConfig() {
+    if (NULL != gGnssAdapter) {
+        return gGnssAdapter->gnssResetSvConfigCommand();
+    } else {
+        return 0;
+    }
+}
+
+static uint32_t configLeverArm(const LeverArmConfigInfo& configInfo){
+    if (NULL != gGnssAdapter) {
+        return gGnssAdapter->configLeverArmCommand(configInfo);
+    } else {
+        return 0;
+    }
 }

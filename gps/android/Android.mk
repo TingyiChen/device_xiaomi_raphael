@@ -1,9 +1,15 @@
-ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
 LOCAL_PATH := $(call my-dir)
-ifeq ($(GNSS_HIDL_VERSION),1.1)
-include $(LOCAL_PATH)/1.1/Android.mk
+ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
+include $(CLEAR_VARS)
+DIR_LIST := $(LOCAL_PATH)
+include $(DIR_LIST)/utils/Android.mk
+ifeq ($(GNSS_HIDL_VERSION),2.0)
+include $(DIR_LIST)/2.0/Android.mk
 else
-include $(LOCAL_PATH)/1.0/Android.mk
-endif
-
+ifeq ($(GNSS_HIDL_VERSION),1.1)
+include $(DIR_LIST)/1.1/Android.mk
+else
+include $(DIR_LIST)/1.0/Android.mk
+endif #GNSS HIDL 1.1
+endif #GNSS HIDL 2.0
 endif #BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE

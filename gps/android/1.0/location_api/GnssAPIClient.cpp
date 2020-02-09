@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -36,7 +36,7 @@
 
 #include "LocationUtil.h"
 #include "GnssAPIClient.h"
-#include <LocDualContext.h>
+#include <LocContext.h>
 
 namespace android {
 namespace hardware {
@@ -110,9 +110,9 @@ void GnssAPIClient::gnssUpdateCallbacks(const sp<IGnssCallback>& gpsCb,
 
     locationCallbacks.gnssNiCb = nullptr;
     loc_core::ContextBase* context =
-            loc_core::LocDualContext::getLocFgContext(
+            loc_core::LocContext::getLocContext(
                     NULL, NULL,
-                    loc_core::LocDualContext::mLocationHalName, false);
+                    loc_core::LocContext::mLocationHalName, false);
     if (mGnssNiCbIface != nullptr && !context->hasAgpsExtendedCapabilities()) {
         LOC_LOGD("Registering NI CB");
         locationCallbacks.gnssNiCb = [this](uint32_t id, GnssNiNotification gnssNiNotification) {
@@ -174,7 +174,6 @@ bool GnssAPIClient::gnssSetPositionMode(IGnss::GnssPositionMode mode,
         // For MSA, we always treat it as SINGLE mode.
         mTrackingOptions.minInterval = SINGLE_SHOT_MIN_TRACKING_INTERVAL_MSEC;
     }
-    mTrackingOptions.minDistance = preferredAccuracyMeters;
     if (mode == IGnss::GnssPositionMode::STANDALONE)
         mTrackingOptions.mode = GNSS_SUPL_MODE_STANDALONE;
     else if (mode == IGnss::GnssPositionMode::MS_BASED)
@@ -231,6 +230,7 @@ void GnssAPIClient::gnssDeleteAidingData(IGnss::GnssAidingData aidingDataFlags)
         GNSS_AIDING_DATA_SV_TYPE_QZSS_BIT |
         GNSS_AIDING_DATA_SV_TYPE_BEIDOU_BIT |
         GNSS_AIDING_DATA_SV_TYPE_GALILEO_BIT;
+    data.posEngineMask = STANDARD_POSITIONING_ENGINE;
 
     if (aidingDataFlags == IGnss::GnssAidingData::DELETE_ALL)
         data.deleteAll = true;
