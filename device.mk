@@ -90,6 +90,7 @@ PRODUCT_PACKAGES += \
     audio.primary.msmnile \
     audio.r_submix.default \
     audio.usb.default \
+    liba2dpoffload \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
@@ -118,12 +119,16 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libbthost_if
+    android.hardware.bluetooth.audio@2.0-impl \
+    audio.bluetooth.default \
+    libbthost_if \
+    vendor.qti.hardware.bluetooth_audio@2.0.vendor
 
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
+    libdng_sdk.vendor \
     Snap \
     vendor.qti.hardware.camera.device@1.0.vendor
 
