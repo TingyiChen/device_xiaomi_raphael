@@ -280,12 +280,16 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     com.gsma.services.nfc \
     com.nxp.nfc.nq \
+    ls_nq_client \
+    jcos_nq_client \
+    libnqnfc_nci_jni \
     nfc_nci.nqx.default \
     nqnfcee_access.xml \
     nqnfcse_access.xml \
     NQNfcNci \
+    se_nq_extn_client \
     Tag \
-    vendor.nxp.hardware.nfc@1.1-service
+    vendor.nxp.hardware.nfc@1.2-service
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
@@ -339,7 +343,8 @@ PRODUCT_PACKAGES += \
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    vendor/nxp/opensource/sn100x
 
 # Telephony
 PRODUCT_PACKAGES += \
